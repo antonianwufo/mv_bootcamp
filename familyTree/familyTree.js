@@ -1,3 +1,4 @@
+
 const elizabeth = {
     name: 'Elizabeth',
     parents: [],
@@ -21,18 +22,23 @@ const diana = {
 const harry = {
     name: 'Harry',
     parents: [charles,diana],
+    age: 35,
     childOf:function () {return this.parents.map(parent => parent.name).join(' & ') || "unknown"}
 }
 const meghan = {
     name: 'Meghan',
     parents: [],
+    age = 35,
     childOf:function () {return this.parents.map(parent => parent.name).join(' & ') || "unknown"}
 }
 const archie = {
     name: 'Archie',
     parents: [harry,meghan],
-    childOf:function () {return this.parents.map(parent => parent.name).join(' & ') || "unknown"}
+    age: 1,
+    childOf:function () {return this.parents.map(parent => childOf.parents).join(' & ') || "unknown"}
 }
 
 
-console.log(archie.childOf())
+//console.log(archie.childOf())
+
+module.exports = {archie, meghan, harry, diana, charles, philip, elizabeth}
