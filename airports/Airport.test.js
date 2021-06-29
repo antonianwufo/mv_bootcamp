@@ -31,7 +31,7 @@ describe
     {
         expect(() => new Passenger()).toThrowError('passenger must have a name');
     })
-/*Tests whether a passenger has a bag*/
+/*Checks how many bags a passenger has*/
     test('Has a bag', () => 
     {
         const passenger = new Passenger({name: 'Ron'})
