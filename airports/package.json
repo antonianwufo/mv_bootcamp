@@ -1,0 +1,15 @@
+{
+  "name": "airports",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Airport.test.js",
+  "scripts": {
+    "test": "jest",
+    "test:report": "jest --coverage=true"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.0.6"
+  }
+}
