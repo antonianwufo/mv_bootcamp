@@ -32,10 +32,11 @@ const meghan = {
 const archie = {
     name: 'Archie',
     parents: [harry,meghan],
-    childOf:function () {return this.parents.map(parent => childOf.parents).join(' & ') || "unknown"}
+    childOf:function () {return this.parents.map(parent => parent.name).join(' & ') || "unknown"}
 }
 
 
-//console.log(archie.childOf())
-
+console.log(archie.childOf())
+console.log(archie.parents[0].childOf())
+//Problem with solution: can only determine maternal/paternal if array is defined in that order. It doesn't work for Charles above because of the order of his parents array.
 module.exports = {archie, meghan, harry, diana, charles, philip, elizabeth}

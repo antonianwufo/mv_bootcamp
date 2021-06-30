@@ -1,5 +1,6 @@
 const people = require('./familyTree')
 
+//Prove tree has members
 describe('familyTree objects', () => {
 
     test('Is a family member', () => {
@@ -8,7 +9,8 @@ describe('familyTree objects', () => {
     test('Is a family member', () => {
     expect(people.meghan.name).toEqual("Meghan")
     })
-    // test('Has an age', () => {
-    // expect(people.age).objectContaining ({35})
-    // })
+//Prove members are related
+    test('Has a parent', () => {
+    expect(people.archie.parents).toEqual[0]
+    })
 })
