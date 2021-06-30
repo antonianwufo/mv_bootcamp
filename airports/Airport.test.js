@@ -1,44 +1,16 @@
-const Bag = require('./Bag')
-const Passenger = require('./Passenger')
+const Airport = require('./Airport')
 
-/*Tests whether a bag has a weight*/
 describe
 (
-    'Bag', () =>
+    'Airport', () => 
 {
-    test('Has a weight', () => 
+    // test('Airport must have an name', () =>
+    // {
+    //     expect(() => new Airport()).toThrowError('Airport must have an name');
+    // })
+    test('Airport exists', () => 
     {
-        const bag = new Bag(13);
-        expect(bag.weight).toBe(13)
-    })
-/*Throws an error if a weight has not been defined*/
-    test('Does not have a weight', () =>
-    {
-        expect(() => new Bag()).toThrowError('bag must have a weight')
-    })
-})
-/*Tests whether a passenger has a name*/
-describe
-(
-    'Passenger', () => 
-{
-    test('Is a passenger', () => 
-    {
-        const passenger = new Passenger('Ron');
-        expect(passenger.name).toEqual('Ron');
-    })
-    test('Is not a passenger', () =>
-    {
-        expect(() => new Passenger()).toThrowError('passenger must have a name');
-    })
-/*Checks how many bags a passenger has*/
-    test('Has a bag', () => 
-    {
-        const passenger = new Passenger({name: 'Ron'})
-        const carryOn = new Bag(15)
-        const checkedLuggage = new Bag(32)
-        passenger.addBag(carryOn)
-        passenger.addBag(checkedLuggage)
-        expect(passenger.bags.length).toBe(2)
+        const airport = new Airport("Heathrow","London",5,7);
+        expect(airport.name).toEqual("Heathrow","London",5,7);
     })
 })

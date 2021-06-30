@@ -1,19 +1,16 @@
-class Passenger {
-    constructor(name)
+const Person = require('./Person')
+class Passenger extends Person
 {
-    if (!name) 
-    {
-        throw new Error('passenger must have a name')
-    }
-    this.name = name
-    this.bags = []
-    }
-    addBag(bag)
-    {
-    this.bags.push(bag)
-    }
+    constructor(id, name) {
+        this.id = id
+        super(name)
+     }
+//     addPerson(name) {
+//         this.person.push(name)
+//     }
 }
 
-//console.log(Passenger.name)
+// const passenger = new Passenger()
+// console.log(passenger)
 
 module.exports = Passenger
