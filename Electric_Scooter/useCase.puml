@@ -1,0 +1,49 @@
+@startuml
+
+skinparam actorStyle awesome
+
+top to bottom direction
+
+actor StationAllocator
+actor Customer
+actor Maintenance
+
+
+rectangle System {
+usecase Register
+usecase Hire
+usecase Ride
+usecase ReturnToDock
+usecase Abandon
+usecase NotifyRepair
+' rectangle Maintenance {
+usecase RetrieveFaultCode
+usecase ArrangeRepair
+usecase Repair
+usecase MakeAvailable
+' rectangle Maintenance {
+' usecase NotifyAbandonedScooter
+usecase NotifyDistribution
+usecase CollectScooter
+
+Customer --> Register
+Customer --> Hire
+Customer --> Ride
+Customer --> Abandon
+Customer --> ReturnToDock
+Customer --> NotifyRepair
+
+Maintenance <-- NotifyRepair
+Maintenance --> RetrieveFaultCode
+Maintenance --> ArrangeRepair
+Maintenance --> Repair
+Maintenance --> ReturnToDock
+Maintenance --> MakeAvailable
+
+StationAllocator <-- NotifyDistribution
+StationAllocator <-- Abandon
+StationAllocator --> CollectScooter
+StationAllocator --> ReturnToDock
+
+}
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+
+title Scooter Hire - Class Diagram
+
+class Person {
+  String name
+  String getName()
+  String getAddress()
+}
+class Passenger {
+}
+class QR {
+}
+class Payment {
+}
+class Maintenance {
+}
+class StationAllocator {
+}
+class DockingStation {
+  String stationId
+  String getScooterId
+  ' String maximum allocation = 10
+}
+class Scooter {
+}
+class GPS {
+}
+class Monitor {
+  Int getScooterId
+  Int getFaultCode
+  Int getBattLevel
+  String getGPS
+  Int getStationId
+  Int getSpace
+}
+
+Person <|-- Passenger
+Person <|-- Maintenance
+Person <|-- StationAllocator
+Scooter "0..*" -- "many" Passenger
+DockingStation "0..*" -- "many" Scooter
+Payment "1" -- "1" Passenger
+GPS "1" -- "1" Scooter
+GPS "1" -- "1" DockingStation
+QR "1" -- "many" DockingStation
+QR "1" -- "many" Scooter
+Monitor "1" -- "many" DockingStation
+Monitor "1" -- "many" GPS
+Monitor "1" -- "many" Scooter
+Monitor "1" -- "many" Maintenance
+Monitor "1" -- "many" StationAllocator
+
+@enduml
