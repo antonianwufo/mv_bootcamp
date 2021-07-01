@@ -1,0 +1,41 @@
+@startuml
+
+skinparam actorStyle awesome
+
+left to right direction
+
+actor Security
+actor CabinCrew
+actor Pilot
+actor BorderControl
+actor BaggageHandler
+actor Mechanic
+actor Passenger
+actor FriendFamily
+actor TaxiDriver
+
+rectangle System {
+usecase MonitorActivity
+usecase BoardAircraft
+usecase GoThroughSecurity
+usecase FixPlanes
+usecase CheckDocuments
+usecase GoThroughBorderControl
+usecase CheckBaggage
+
+Security --> MonitorActivity
+BorderControl --> CheckDocuments
+Pilot --> GoThroughBorderControl
+Pilot --> GoThroughSecurity
+Pilot --> BoardAircraft
+CabinCrew --> GoThroughBorderControl
+CabinCrew --> GoThroughSecurity
+CabinCrew --> BoardAircraft
+Passenger --> CheckBaggage
+Passenger --> GoThroughBorderControl
+Passenger --> GoThroughSecurity
+Passenger --> BoardAircraft
+Mechanic --> FixPlanes
+
+}
+@enduml

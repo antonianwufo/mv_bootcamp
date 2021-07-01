@@ -1,0 +1,40 @@
+@startuml
+
+title Airports - Class Diagram
+
+class Person {
+  String name
+  String getName()
+  String getBag()
+}
+class Passenger {
+}
+class Crew {
+}
+class Bag {
+}
+class Plane {
+  String aircraftType
+  String flightNumber
+}
+class Airport {
+  String airportName
+  String location
+  Int terminal
+  Int gate 
+}
+
+Person <|-- Passenger
+Person <|-- Crew
+Plane "0..*" -- "many" Passenger
+Plane "1" -- "many" Crew
+' Plane "1" o-- "many" Bag
+Airport "0..*" -- "many" Plane
+' Airport "1" o-- "many" Plane
+' Airport "1" o-- "many" Passenger
+' Airport "1" o-- "many" Crew
+Airport "1" o-- "many" Person
+' Crew "1" o-- "many" Plane
+Bag "0..*" -- "1" Person
+Bag -- "many" Plane
+@enduml
