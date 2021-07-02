@@ -1,0 +1,21 @@
+@startuml
+
+skinparam actorStyle awesome
+
+actor Customer
+participant ScooterApp
+actor Scooter
+participant ScooterAPI
+participant Booking
+database ScooterDatabase
+actor DockingStation
+
+Customer -> ScooterApp: scanQrCode
+ScooterApp -> ScooterAPI:requestHire
+ScooterAPI -> Scooter: checkFaultCode/BattLevel/Mileage
+ScooterAPI -> Booking: create trip start
+ScooterAPI -> ScooterDatabase: store transaction
+ScooterApp -> DockingStation: unlock scooter
+DockingStation -> DockingStation: release scooter
+ScooterAPI -> ScooterApp: notify low battery/fault
+@enduml

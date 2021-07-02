@@ -1,0 +1,24 @@
+@startuml
+
+skinparam actorStyle awesome
+
+actor Customer
+participant ScooterApp
+actor Scooter
+participant ScooterAPI
+participant Booking
+database ScooterDatabase
+actor DockingStation
+actor PaymentAPI
+
+Customer -> ScooterApp: return scooter
+ScooterApp -> ScooterAPI:request return
+ScooterApp -> ScooterAPI:notify fault
+ScooterAPI -> Scooter: check FaultCode/BattLevel/Mileage
+ScooterAPI -> Booking: create trip end
+ScooterAPI -> ScooterDatabase: update transaction
+ScooterApp -> DockingStation: lock scooter
+DockingStation -> DockingStation: lock scooter
+ScooterAPI -> PaymentAPI: process payment
+ScooterAPI -> Customer: confirm payment and send booking summary
+@enduml

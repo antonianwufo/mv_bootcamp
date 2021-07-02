@@ -1,54 +1,77 @@
+
 @startuml
 
 title Scooter Hire - Class Diagram
 
 class Person {
-  String name
-  String getName()
+  - String name
+  + String getName()
   String getAddress()
 }
-class Passenger {
+class Customer {
+  name
+  address
+  telephoneNo
+  email
+
 }
 class QR {
 }
-class Payment {
+class Booking {
 }
-class Maintenance {
+class MaintenancePersonnel {
+  String employeeId
+  String name
 }
 class StationAllocator {
+    String employeeId
+    String name
 }
 class DockingStation {
   String stationId
-  String getScooterId
+  String getScooterId()
+  charge()
   ' String maximum allocation = 10
 }
 class Scooter {
+  String scooterId
 }
 class GPS {
 }
-class Monitor {
-  Int getScooterId
-  Int getFaultCode
-  Int getBattLevel
-  String getGPS
-  Int getStationId
-  Int getSpace
+class MonitorScooter {
+  Int getScooterId()
+  Int getFaultCode()
+  Int getBattLevel()
+  String getGPS()
+}
+class MonitorStation {
+  Int getstationId()
+  Int getSpace()
+}
+class Database{
+}
+class ScooterAPI{
+}
+class HireApp{
 }
 
-Person <|-- Passenger
-Person <|-- Maintenance
+Person <|-- Customer
+Person <|-- MaintenancePersonnel
 Person <|-- StationAllocator
-Scooter "0..*" -- "many" Passenger
+Scooter "0..*" -- "many" Customer
 DockingStation "0..*" -- "many" Scooter
-Payment "1" -- "1" Passenger
+Booking "1" -- "1" Customer
 GPS "1" -- "1" Scooter
 GPS "1" -- "1" DockingStation
 QR "1" -- "many" DockingStation
-QR "1" -- "many" Scooter
-Monitor "1" -- "many" DockingStation
-Monitor "1" -- "many" GPS
-Monitor "1" -- "many" Scooter
-Monitor "1" -- "many" Maintenance
-Monitor "1" -- "many" StationAllocator
+QR "1" -- "1" Scooter
+MonitorStation "1" -- "many" DockingStation
+MonitorScooter "1" -- "many" GPS
+MonitorScooter "1" -- "many" Scooter
+MonitorScooter "1" -- "many" MaintenancePersonnel
+MonitorStation "1" -- "many" StationAllocator
+Customer "many" -- "1" HireApp
+ScooterAPI "1" -- "1" Database
+HireApp "1" -- "1" ScooterAPI
 
 @enduml

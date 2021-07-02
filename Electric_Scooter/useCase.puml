@@ -2,18 +2,23 @@
 
 skinparam actorStyle awesome
 
-top to bottom direction
+left to right direction
 
-actor StationAllocator
 actor Customer
-actor Maintenance
+package Maintenance {
+    actor MaintenancePersonnel as m
+}
+package StationAllocator {
+    actor StationAllocator as s
+}
 
 
-rectangle System {
+rectangle ScooterApp {
 usecase Register
 usecase Hire
 usecase Ride
 usecase ReturnToDock
+usecase TakePayment
 usecase Abandon
 usecase NotifyRepair
 ' rectangle Maintenance {
@@ -45,5 +50,6 @@ StationAllocator <-- Abandon
 StationAllocator --> CollectScooter
 StationAllocator --> ReturnToDock
 
+ReturnToDock -> TakePayment
 }
 @enduml

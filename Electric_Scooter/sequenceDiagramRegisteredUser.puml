@@ -1,0 +1,18 @@
+@startuml
+
+skinparam actorStyle awesome
+
+actor Customer
+participant ScooterApp
+participant ScooterAPI
+database ScooterDatabase
+
+Customer -> ScooterApp: enter registration details(email/username)
+ScooterApp -> ScooterApp: validate input
+ScooterApp -> ScooterAPI: registration details
+ScooterAPI -> ScooterDatabase: already registered?
+ScooterAPI -> Customer: decline - customer already registered
+
+
+
+@enduml

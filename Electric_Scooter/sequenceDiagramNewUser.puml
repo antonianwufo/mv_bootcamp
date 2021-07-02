@@ -1,0 +1,32 @@
+@startuml
+
+skinparam actorStyle awesome
+
+actor Customer
+participant ScooterApp
+participant ScooterAPI
+database ScooterDatabase
+actor IdVerifyAPI
+actor PaymentAPI
+
+Customer -> ScooterApp: enter registration details(email/username)
+ScooterApp -> ScooterApp: validate input
+ScooterApp -> ScooterAPI: registration details
+Customer -> ScooterApp: enter payment and license details
+ScooterApp -> ScooterApp: validate input
+ScooterApp -> ScooterAPI: enter payment and license details
+ScooterAPI -> IdVerifyAPI: verify valid license and age requirements
+IdVerifyAPI -> ScooterApp: invalid
+ScooterApp -> Customer: registration failed
+ScooterAPI -> PaymentAPI: verify valid payment details
+PaymentAPI -> ScooterApp: invalid
+ScooterApp -> Customer: registration failed
+IdVerifyAPI -> ScooterApp: valid
+PaymentAPI -> ScooterApp: valid
+ScooterAPI -> ScooterDatabase: create new user
+ScooterApp -> Customer: confirm registration
+
+
+
+
+@enduml
