@@ -13,7 +13,7 @@ describe
         const scooter = new Scooter(111);
         expect(scooter.id).toEqual(111);
     })
-    /*how can I get this to check the actual array?*/
+    /*how can I get this to check an array?*/
     test('Check scooter battery needs charging', () => 
     {
         const scooter = new Scooter(111,[98]);
@@ -29,6 +29,12 @@ describe
         const scooter = new Scooter(111,[98]);
         expect(scooter.charge()).toEqual("Needs charging");
     })   
+    // test('Scooter is charging', async() => 
+    // {
+    //     const scooter = new Scooter(111,100,0,0);
+    //     await scooter.charge();
+    //     console.log("Test complete");
+    // }) 
     test('Function - Scooter is fully charged', () => 
     {
         const scooter = new Scooter(111,[100]);
@@ -51,23 +57,23 @@ describe
     }) 
     test('Scooter is unavailable for hire', () => 
     {
-        const scooter = new Scooter(111,[98],[999]);
+        const scooter = new Scooter(111,98,999,5);
         expect(scooter.availability()).toBeFalsy();
     })   
     test('Scooter is available for hire', () => 
     {
-        const scooter = new Scooter(111,100,1);
+        const scooter = new Scooter(111,100,0,0);
         expect(scooter.availability()).toBeTruthy();
     }) 
     test('Scooter is docked', () => 
     {
-        const scooter = new Scooter(111);
+        const scooter = new Scooter(111,100,0,99);
         expect(scooter.isDocked()).toBeTruthy();
     })   
-    test('Scooter is docked', () => 
+    test('Scooter is not docked', () => 
     {
-        const scooter = new Scooter(111);
-        expect(scooter.isDocked()).toBe(false);
+        const scooter = new Scooter(111,100,0,0);
+        expect(scooter.isDocked()).toBeFalsy();
     })  
     test('Scooter is not docked - station id', () => 
     {

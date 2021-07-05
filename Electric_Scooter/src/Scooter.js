@@ -1,32 +1,32 @@
 class Scooter 
 {
-    constructor(id, battLvl, faultCode) 
+    faultCode = 0
+    stationId = 0
+    faultCode = 0
+    constructor(id, battLvl, faultCode, stationId) 
     {
         if (!id) 
         {
             throw new Error('Scooter must have an ID')
         }
         this.id = id
-        this.stationId = false
+        this.stationId = stationId
         this.battLvl = battLvl
-        this.isFaultCode = faultCode
+        this.faultCode = faultCode
     }
-// addStationId(stationId){
-//     this.stationId.push(stationId)
-// }
     isDocked()
-    {
-        if (this.isStationId > 0)
-        {
-            return false
-        } else
+    {//console.log(Scooter.stationId)
+        if (this.stationId != 0)
         {
             return true
+        } else
+        {
+            return false
         }
     }
     reportBroken() 
-    {
-        if (this.isFaultCode != 0)
+    {//console.log(Scooter.faultCode)
+        if (this.faultCode != 0)
         {
             return false
         } else
@@ -36,18 +36,25 @@ class Scooter
     }
     charge() 
     {
-        if (this.battLvl = 100)
+        if (this.battLvl != 100)
         {
-            return "Fully charged"
+            return "Needs charging"
         } 
         else
         {
-            return "Needs charging"
+            return "Fully charged"
         }
     }
+//    async charge() {
+//         // console.log('Starting charge');
+
+//         await new Promise(resolve => setTimeout(resolve, 2000)); // wait 2 seconds
+
+//         // console.log('Charge complete');   
+//    }    
     availability() 
     {
-        if (this.battLvl !== 100 || this.faultCode !== 0) 
+        if (this.battLvl != 100 || this.faultCode != 0 || this.stationId != 0) 
         {
             return false
         } 
