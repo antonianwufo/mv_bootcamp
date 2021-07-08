@@ -1,0 +1,20 @@
+-- SELECT * FROM RESTAURANTS
+-- SELECT * FROM MENU
+-- SELECT * FROM MENUITEM
+--DELETE FROM MENU WHERE ID >= 5
+--INSERT INTO restaurants VALUES (1,"Banyan on the Thames","x");
+--INSERT INTO restaurants VALUES (2,"Roku","x");
+--INSERT INTO menu (TITLE,restaurant_id) VALUES ("Al Fresco",1);
+--INSERT INTO menuitem (name, price, menu_id) VALUES ("Pasta al Pomodoro", 20.00, 1);
+-- INSERT INTO menu (TITLE,restaurant_id) VALUES ("Dinner",2);
+-- INSERT INTO menuitem (name, price, menu_id) VALUES ("Sweet chilli vegan 'chicken'", 25.00, 2);
+-- INSERT INTO menuitem (name, price, menu_id) VALUES ("Edamame", 7.00, 2);
+-- INSERT INTO menuitem (name, price, menu_id) VALUES ("Roasted 'Tofurkey'", 35.00, 2);
+-- INSERT INTO menuitem (name, price, menu_id) VALUES ("Lemon and herb skewers (vg)", 15.00, 2);
+-- INSERT INTO menu (TITLE,restaurant_id) VALUES ("Brunch",2);
+-- INSERT INTO menuitem (name, price, menu_id) VALUES ("Coconut & banana pancakes (vg)", 9.00, 3);
+-- INSERT INTO menuitem (name, price, menu_id) VALUES ("Vegan fry-up (vg)", 27.00, 3);
+
+-- DROP TABLE [ IF EXISTS ] RESTAURANTS;
+-- DROP TABLE [ IF EXISTS ] MENU;
+-- DROP TABLE [ IF EXISTS ] MENUITEM;

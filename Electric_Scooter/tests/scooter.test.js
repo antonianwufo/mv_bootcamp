@@ -16,18 +16,18 @@ describe
     /*how can I get this to check an array?*/
     test('Check scooter battery needs charging', () => 
     {
-        const scooter = new Scooter(111,[98]);
-        expect(scooter.battLvl).toEqual([98]);
+        const scooter = new Scooter(111,98);
+        expect(scooter.battLvl).toEqual(98);
     })   
     test('Scooter is fully charged', () => 
     {
-        const scooter = new Scooter(111,[100]);
-        expect(scooter.battLvl).toEqual([100]);
+        const scooter = new Scooter(111,100);
+        expect(scooter.battLvl).toEqual(100);
     })   
     test('Function - Check scooter battery needs charging', () => 
     {
-        const scooter = new Scooter(111,[98]);
-        expect(scooter.charge()).toEqual("Needs charging");
+        const scooter = new Scooter(111,98);
+        expect(scooter.charge()).toBeTruthy();
     })   
     // test('Scooter is charging', async() => 
     // {
@@ -37,22 +37,22 @@ describe
     // }) 
     test('Function - Scooter is fully charged', () => 
     {
-        const scooter = new Scooter(111,[100]);
-        expect(scooter.charge()).toEqual("Fully charged");
+        const scooter = new Scooter(111,100);
+        expect(scooter.charge()).toBeFalsy();
     })   
     test('Scooter is working', () => 
     {
-        const scooter = new Scooter(111,[100],[0]);
+        const scooter = new Scooter(111,100,0);
         expect(scooter.reportBroken()).toBeTruthy();
     })   
     test('Scooter needs repair', () => 
     {
-        const scooter = new Scooter(111,[100],[999]);
+        const scooter = new Scooter(111,100,999);
         expect(scooter.reportBroken()).toBeFalsy();
     })   
     test('Scooter is working', () => 
     {
-        const scooter = new Scooter(11,[100],[0]);
+        const scooter = new Scooter(11,100,0);
         expect(scooter.reportBroken()).toBeTruthy();
     }) 
     test('Scooter is unavailable for hire', () => 
