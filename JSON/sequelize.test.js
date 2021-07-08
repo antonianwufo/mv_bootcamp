@@ -1,5 +1,5 @@
 const {sequelize} = require('./sequelize');
-const {Restaurant} = require('./Restaurant')
+const {Restaurant} = require('./cRestaurant')
 
 describe('Restaurant', () => {
     /**
