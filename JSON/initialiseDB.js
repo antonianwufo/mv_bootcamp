@@ -4,7 +4,8 @@ const sqlite3 = require('sqlite3').verbose();
  */
 function initialise() {
     // connect to a database named restaurants.sqlite
-    const db = new sqlite3.Database('./restaurant.sqlite');
+    const db = new sqlite3.Database('./restaurant-seq.sqlite');
+    freezeTableName: true;
     try {
         db.serialize(function () { // serialize means execute one statement at a time
             console.log('starting table creation');

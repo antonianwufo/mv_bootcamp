@@ -1,4 +1,4 @@
-const {sequelize, DataTypes, Model} = require('./sequelize_index');
+const {sequelize, DataTypes, Model} = require('./sequelize');
 
 /**
  * Represents a menu
@@ -14,7 +14,9 @@ Menu.init({
 }, {
     sequelize,
     timestamps: false,
+    freezeTableName: true,
 });
+
 
 module.exports = {
     Menu

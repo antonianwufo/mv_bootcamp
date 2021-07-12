@@ -16,7 +16,13 @@ describe('Restaurant', () => {
         //await makes a function wait for a promise
     })
 
-    test('can create a restaurant', async () => {
+    test('can create a menu', async () => {
+        await sequelize.sync({ force: true }); // recreate db
+        const restaurant = await Restaurant.create({ name: 'Ronalds', image: 'http://some.image.url' })
+        expect(restaurant.id).toBe(1)
+    })
+
+    test('can create a restaurant linked to a menu and menu items', async () => {
         await sequelize.sync({ force: true }); // recreate db
         const restaurant = await Restaurant.create({ name: 'Ronalds', image: 'http://some.image.url' })
         expect(restaurant.id).toBe(1)
@@ -30,15 +36,5 @@ describe('Restaurant', () => {
         expect(menuItem.length).toBe(1);
 
         expect(menus[0].title).toBe('set 1');
-    })
-    test('can create a menu', async () => {
-        await sequelize.sync({ force: true }); // recreate db
-        const menu = await Menu.create({ title: 'Drinks', restaurant_id: 9 })
-        expect(menu.id).toBe(1)
-    })
-    test('can create a menu item', async () => {
-        await sequelize.sync({ force: true }); // recreate db
-        const menuItem = await MenuItem.create({ name: 'Still water', price: 3.00, menu_id: 1 })
-        expect(menuItem.id).toBe(1)
     })
 })

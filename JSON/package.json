@@ -6,6 +6,8 @@
   "dependencies": {
     "jest": "^27.0.6",
     "sequelize": "^6.6.5",
+    "sequelize-automate": "^1.2.2",
+    "sqlite": "^4.0.23",
     "sqlite3": "^5.0.2"
   },
   "scripts": {
