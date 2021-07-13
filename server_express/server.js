@@ -1,40 +1,116 @@
-const express = require('express');
+const express = require("express");
+const connection = require("./sequelize_connect");
+const Restaurants = require("./Models/cRestaurant");
+const Menus = require("./Models/cMenu");
+const MenuItems = require("./Models/cMenuItem");
+//const restaurant = require('./JSON/restaurant.sqlite');
 
 const app = express();
 const port = 3000;
 
 //app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
-// app.get("/now", (request, response) => {
-//     const date = new Date();
-//     response.send(date);
-//   });
+Restaurants.hasMany(Menus);
+Menus.belongsTo(Restaurants);
+Menus.hasMany(MenuItems);
+MenuItems.belongsTo(Menus);
 
-//   app.get("/flipcoin", (request, response) => {
-//     if (Math.random) >= 0.5
-//         response.send('heads');
-//     else
-//     response.send('tails');
-//   });
+connection
+  .sync(
+  //   {
+  //   force: true
+  // }
+  )
+  .then(() => {
+    console.log("Connected to DB");
+  })
+  .catch((err) => {
+    console.error("Unable to connect:", err);
+  });
 
-//get
-app.get("/restaurant", (request, response) => {
-    response.send('Get restaurants');
+//get all
+app.get("/restaurants", async (request, response) => {
+  const list = await Restaurants.findAll()
+  response.json(list);
 });
-//create
-app.post("/restaurant", (request, response) => {
-    response.send(request.body.name);
+//get 1 restaurant by id
+app.get("/restaurants/:id", async (request, response) => {
+  const list = await Restaurants.findByPk(request.params.id)
+  response.json(list);
 });
-//update
-app.put("/restaurant", (request, response) => {
-    response.send(request.bodynodemon);
+//create a restaurant
+app.post("/restaurants", async (request, response) => {
+  const restaurant = await Restaurants.create({
+    name: request.body.name,
+    image: request.body.image,
+  });
+  response.json(request.body);
 });
-//delete
-app.delete("/restaurant", (request, response) => {
-    response.send('Delete a restaurant');
+//create a menu
+app.post("/menus", async (request, response) => {
+  const menu = await Menus.create({
+    title: request.body.title,
+    RestaurantId: request.body.RestaurantId
+  });
+  response.status(201).json(menu);
 });
+//create a menu item
+app.post("/menuItem", async (request, response) => {
+  const menuItem = await MenuItems.create({
+    name: request.body.name,
+    price: request.body.price,
+    MenuId: request.body.MenuId
+  });
+  response.status(201).json(menuItem);
+});
+//update a restaurant
+app.put("/restaurants/:id", async(request, response) => {
+  const rows = await Restaurants.update({
+    name: request.body.name,
+    image: request.body.image
+  },{
+    where: {id: request.params.id}
+  })
+        response.json(rows);
+});
+//update a menu
+app.put("/menus/:id", async(request, response) => {
+  const rows = await Menus.update({
+    title: request.body.title,
+    RestaurantId: request.body.RestaurantId,
+  },{
+    where: {id: request.params.id}
+  })
+        response.json(rows);
+});
+//update a menu item
+app.put("/menuItem/:id", async(request, response) => {
+  const rows = await MenuItems.update({
+    name: request.body.title,
+    price: request.body.price,
+    MenuId: request.body.MenuId,
+  },{
+    where: {id: request.params.id}
+  })
+        response.json(rows);
+});
+//delete a restaurant
+app.delete("/restaurants/:id", async(request, response) => {
+ const Restaurant = await Restaurants.destroy({
+    where: { id: request.params.id },
+    })
+  response.send("Restaurant successfully deleted");
+});
+//delete a menu
+app.delete("/menus/:id", async(request, response) => {
+  const menus = await Menus.destroy({
+     where: { id: request.params.id },
+     })
+   response.send("Menu successfully deleted");
+ });
 
 app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`)
-})
+  console.log(`Server listening at http://localhost:${port}`);
+});
