@@ -30,9 +30,18 @@ connection
     console.error("Unable to connect:", err);
   });
 
-//get all
+//get all restaurants and associated menus
 app.get("/restaurants", async (request, response) => {
-  const list = await Restaurants.findAll()
+  const list = await Restaurants.findAll({
+    include: [Menus]
+  })
+  response.json(list);
+});
+//get all menus and associated items
+app.get("/menus", async (request, response) => {
+  const list = await Menus.findAll({
+    include: [MenuItems]
+  })
   response.json(list);
 });
 //get 1 restaurant by id
@@ -98,17 +107,24 @@ app.put("/menuItem/:id", async(request, response) => {
 });
 //delete a restaurant
 app.delete("/restaurants/:id", async(request, response) => {
- const Restaurant = await Restaurants.destroy({
+await Restaurants.destroy({
     where: { id: request.params.id },
     })
   response.send("Restaurant successfully deleted");
 });
 //delete a menu
 app.delete("/menus/:id", async(request, response) => {
-  const menus = await Menus.destroy({
+await Menus.destroy({
      where: { id: request.params.id },
      })
    response.send("Menu successfully deleted");
+ });
+ //delete a menu
+app.delete("/menuItem/:id", async(request, response) => {
+await MenuItems.destroy({
+     where: { id: request.params.id },
+     })
+   response.send("Menu item successfully deleted");
  });
 
 app.listen(port, () => {
