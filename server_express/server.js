@@ -1,5 +1,7 @@
 const express = require("express");
-const router = require('./router')
+const Handlebars = require('handlebars')
+const expressHandlebars = require('express-handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const connection = require("./sequelize_connect");
 const Restaurants = require("./Models/cRestaurant");
 const Menus = require("./Models/cMenu");
@@ -20,12 +22,11 @@ Menus.hasMany(MenuItems);
 MenuItems.belongsTo(Menus);
 
 connection
-  .sync
-  //   {
+  .sync(
+    {
   //resets data and rebuilds tables
-  //   force: true
-  // }
-  ()
+    // force: true
+  })
   .then(() => {
     console.log("Connected to DB");
   })
@@ -161,6 +162,16 @@ app.post("/restaurants", async (request, response) => {
   response.status(201).json(restaurant);
 });
 
+//create a restaurant
+app.post("/restaurants", async (request, response) => {
+  const restaurant = await Restaurants.create({
+    name: request.body.name,
+    image: request.body.image,
+  });
+  response.status(201).json(restaurant);
+  response.redirect('/')
+});
+
 //create a menu
 app.post("/menus", async (request, response) => {
   const menu = await Menus.create({
@@ -259,6 +270,61 @@ app.delete("/menuItem/:id", async (request, response) => {
   response.status(200).send(rows + "Menu item successfully deleted");
 });
 
+/**************************               Rendering         *******************************************/
+// setup our templating engine
+const handlebars = expressHandlebars({
+  handlebars: allowInsecurePrototypeAccess(Handlebars)
+})
+app.engine('handlebars', handlebars)
+app.set('view engine', 'handlebars')
+
+// serve static assets from the public/ folder
+app.use(express.static('public'));
+
+// this route returns HTML for all the restaurants
+app.get('/web/restaurants', async (req, res) => {
+  const restaurants = await Restaurants.findAll()
+  res.render('restaurants', { restaurants })
+  //console.log(restaurants)
+})
+// this route returns HTML for a single restaurant
+app.get('/web/restaurants/:id', async (req, res) => {
+  const restaurant = await Restaurants.findByPk(req.params.id)
+  res.render('restaurant', { restaurant })
+  //console.log(restaurant)
+})
+// this route returns HTML for a single restaurant and its menus
+app.get("/web/restaurants/:id/menus", async (request, response) => {
+  const restaurant = await Restaurants.findOne({
+		where: { id: request.params.id },
+		include: [
+			{
+				model: Menus,
+				include: [MenuItems],
+			},
+		],
+	});
+
+  console.log(restaurant)
+  //response.json(restaurant)
+  response.render('restaurant', { restaurant })
+});
+// this route deletes a restaurant when the 'Delete' link is clicked
+app.get('/web/dRestaurants/:id/delete', async (request, response) => {
+  await Restaurants.findByPk(request.params.id);
+  await Restaurants.destroy({
+    where: { id: request.params.id },
+  });
+  response.send('Restaurant successfully deleted')
+  console.log(id)
+});
+// this route links to a form where a new restaurant can be created
+app.get("/web/aRestaurants", async (request, response) => {
+  const restaurant = await Restaurants.create(request.body);
+  response.render('newrestaurant', { restaurant }).json(restaurant).send("Restaurant added");
+  //response.redirect('/restaurants')
+});
+/**************************               Listen         *******************************************/
 //used to bind and listen the connections on the specified host and port
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

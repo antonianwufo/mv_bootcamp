@@ -1,0 +1,2 @@
+            <div class='dropdown-content'><a href='http://localhost:3000/web/dRestaurants/:{{id}}'>Delete a
+                    restaurant</a>

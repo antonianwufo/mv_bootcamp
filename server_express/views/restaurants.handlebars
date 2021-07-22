@@ -1,0 +1,12 @@
+<section>
+    <divr class="resto">
+        {{#each restaurants}}
+        <a href='http://localhost:3000/web/restaurants/{{id}}/menus'>
+            <figure>
+                <figcaption>{{name}}</figcaption>
+                <img src="{{image}}" width="220" height="200" />
+            </figure>
+            <a href='http://localhost:3000/web/dRestaurants/{{id}}/delete'>Delete</a>
+    </divr>
+    {{/each}}
+</section>

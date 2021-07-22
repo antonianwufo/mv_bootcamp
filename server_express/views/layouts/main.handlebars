@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/style.css" />
+        <script>
+        function openMenu() { var navMain = document.getElementById('navMenuId'); if (navMain.className === 'navMenu') { navMain.className += ' mobileView'; } else { navMain.className = 'navMenu'; } }
+    </script>
+    <div class='navMenu' id='navMenuId'><a href='http://localhost:3000/' class='main_links'>Home</a>
+        <div class='dropdown'><button class='dropbtn'><i class='fa fa-caret-down'>&#9660;</i></button>
+            <div class='dropdown-content'><a href=''></a></div>
+        </div><a href='http://localhost:3000/web/restaurants/' class='main_links'>Restaurants</a>
+        <div class='dropdown'><button class='dropbtn'><i class='fa fa-caret-down'>&#9660;</i></button>
+            <div class='dropdown-content'><a href='http://localhost:3000/web/aRestaurants/'>Add a new restaurant</a>
+            </div>
+        </div><a class='icon' href='javascript:void(0);' onclick='openMenu()'>&#9776;</a>
+    </div>
+</head>
+
+<body>
+    {{{body}}}
+</body>
+
+</html>

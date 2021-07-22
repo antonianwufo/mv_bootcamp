@@ -1,0 +1,28 @@
+<section>
+    <h1></h1>
+
+    <divm>{{restaurant.name}}</divm>
+    <br>
+    <figureM>
+        <img src="{{restaurant.image}}" width="320" height="300" margin="auto" />
+    </figureM>
+    <br>
+
+    <divl><a href='http://localhost:3000/web/urestaurants/{{id}}'>Modify this restaurant </a></divl>
+
+
+
+    {{#each restaurant.Menus}}
+    <divm>
+        Menu: {{this.title}}
+    </divm>
+    <br>
+    {{#each MenuItems}}
+    <li>{{this.name}} |
+        {{this.price}}
+    </li>
+
+    {{/each}}
+    {{/each}}
+
+</section>

@@ -1,0 +1,25 @@
+<section>
+    <script>
+        function openMenu() { var navMain = document.getElementById('navMenuId'); if (navMain.className === 'navMenu') { navMain.className += ' mobileView'; } else { navMain.className = 'navMenu'; } }
+    </script>
+    <div class='navMenu' id='navMenuId'><a href='http://localhost:3000/' class='main_links'>Home</a>
+        <div class='dropdown'><button class='dropbtn'><i class='fa fa-caret-down'>&#9660;</i></button>
+            <div class='dropdown-content'><a href=''></a></div>
+        </div><a href='http://localhost:3000/web/restaurants/' class='main_links'>Restaurants</a>
+        <div class='dropdown'><button class='dropbtn'><i class='fa fa-caret-down'>&#9660;</i></button>
+            <div class='dropdown-content'><a href='http://localhost:3000/web/dRestaurants/:{{id}}'>Delete a restaurant</a>
+            </div>
+        </div><a class='icon' href='javascript:void(0);' onclick='openMenu()'>&#9776;</a>
+    </div>
+    <p>
+    </p>
+    <divr class="resto">
+        {{#each restaurants}}
+        <figure>
+            <figcaption>{{name}}</figcaption>
+            <img src="{{image}}" width="220" height="200" />
+        </figure>
+    </divr>
+      {{@index}}: {{this}}
+    {{/each}}
+</section>
